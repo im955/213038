@@ -1,0 +1,118 @@
+quastion 1:
+using System;
+
+abstract class Telephone
+{
+    protected string phonetype;
+
+    public Telephone(string type)
+    {
+        phonetype = type;
+    }
+
+    public abstract void Ring();
+}
+
+class ElectronicPhone : Telephone
+{
+    public ElectronicPhone() : base("Digital")
+    {
+    }
+
+    public void Run()
+    {
+        Ring();
+    }
+
+    public override void Ring()
+    {
+        Console.WriteLine($"Ringing the {phonetype} phone.");
+    }
+}
+
+class DigitalPhone : Telephone
+{
+    public DigitalPhone() : base("Digital")
+    {
+    }
+
+    public override void Ring()
+    {
+        Console.WriteLine($"Ringing the {phonetype} phone differently.");
+    }
+}
+
+class TalkingPhone : Telephone
+{
+    public TalkingPhone() : base("Talking")
+    {
+    }
+
+    public override void Ring()
+    {
+        Console.WriteLine($"Ringing the {phonetype} phone differently.");
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        ElectronicPhone electronicPhone = new ElectronicPhone();
+        DigitalPhone digitalPhone = new DigitalPhone();
+        TalkingPhone talkingPhone = new TalkingPhone();
+
+        electronicPhone.Run();
+        digitalPhone.Ring();
+        talkingPhone.Ring();
+    }
+}
+
+
+question 2:
+using System;
+using System.Windows.Forms;
+using System.Collections;
+
+namespace WindowsFormsApp
+{
+    public partial class MainForm : Form
+    {
+        ArrayList dataList = new ArrayList();
+
+        public MainForm()
+        {
+            InitializeComponent();
+        }
+
+       
+        private void addButton_Click(object sender, EventArgs e)
+        {
+            string newItem = inputTextBox.Text;
+            if (!string.IsNullOrEmpty(newItem))
+            {
+                dataList.Add(newItem);
+                listBox.Items.Add(newItem);
+                inputTextBox.Clear();
+            }
+        }
+
+
+        private void removeButton_Click(object sender, EventArgs e)
+        {
+            if (listBox.SelectedIndex >= 0)
+            {
+                int selectedIndex = listBox.SelectedIndex;
+                dataList.RemoveAt(selectedIndex);
+                listBox.Items.RemoveAt(selectedIndex);
+            }
+        }
+
+       
+        private void clearButton_Click(object sender, EventArgs e)
+        {
+            dataList.Clear();
+            listBox.Items.Clear();
+        }
+    }
+}
